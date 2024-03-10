@@ -27,6 +27,8 @@ public class GUI extends JFrame {
     private JLabel lblHandOne;
     private JLabel lblHandTwo;
     private JLabel lblRank;
+    private JLabel lblBbest;
+    private JLabel lblBestHand;
 
     public GUI() {
 
@@ -50,17 +52,19 @@ public class GUI extends JFrame {
         btnSubmit.addActionListener(new ActionListener() { //submit button that uses your input to get the amount of cards they wanted
             @Override
             public void actionPerformed(ActionEvent e) {
-                lblHandOne.setText("");
 
                 Deck deck = new Deck();
+                BestHandFinder bestHand = new BestHandFinder();
                 int userInput = Integer.parseInt(txtInput.getText());
-                deck.pick(userInput); //running pick method to get the amount og cards they wanted
 
+                lblBestHand.setText(bestHand.findBestHand(List.of(deck.pick(userInput))).describeHand());   //running pick method to get the amount of cards they wanted, \
+                                                                                                            // while also getting the best possible hand
                 //clearing panels
                 cardPanel.removeAll();
                 handOne.removeAll();
                 handTwo.removeAll();
                 for (String cards : deck.img) { //for loop to load all images for card faces
+
 
                     //calling loadimage method to set dimensions and load the image
                     ImageIcon cardImage = new ImageIcon(loadImage(cards, 100, 120));
